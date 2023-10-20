@@ -227,7 +227,7 @@ if !exists('g:jupytext_command')
 endif
 
 if !exists('g:jupytext_fmt')
-    let g:jupytext_fmt = 'md'
+    let g:jupytext_fmt = 'py'
 endif
 
 if !exists('g:jupytext_style')
@@ -271,8 +271,7 @@ function s:read_from_ipynb()
     call s:debugmsg("jupytext_file exists: ".b:jupytext_file_exists)
     if (l:filename_exists && !b:jupytext_file_exists)
         call s:debugmsg("Generate file ".b:jupytext_file)
-        let l:cmd = g:jupytext_command." --to=".g:jupytext_fmt.g:jupytext_style
-        \         . " --output=".shellescape(b:jupytext_file) . " "
+        let l:cmd = g:jupytext_command." --to='py:hydrogen' --output=".shellescape(b:jupytext_file) . " "
         \         . shellescape(l:filename)
         call s:debugmsg("cmd: ".l:cmd)
         let l:output=system(l:cmd)
